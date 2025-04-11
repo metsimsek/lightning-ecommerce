@@ -28,9 +28,9 @@ PurchaseReceiptEmail.PreviewProps = {
     paymentMethod: 'Stripe',
     shippingAddress: {
       fullName: 'Matt Damon',
-      streetAddress: '123 Trafalgar Street',
+      streetAddress: '123 Main st',
       city: 'London',
-      postalCode: 'W1 1AB',
+      postalCode: 'W6 9PB',
       country: 'UK',
     },
     createdAt: new Date(),

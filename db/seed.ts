@@ -13,12 +13,11 @@ async function main() {
   await prisma.product.createMany({ data: sampleData.products });
   const users = [];
   for (const user of sampleData.users) {
-    const hashedPassword = await hash(user.password);
     users.push({
       ...user,
-      password: hashedPassword,
+      password: await hash(user.password),
     });
-    console.log(user.password, hashedPassword);
+    console.log(user.password, await hash(user.password));
   }
   await prisma.user.createMany({ data: users });
 
