@@ -18,12 +18,20 @@ export async function POST(req: NextRequest) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET as string
     );
-  } catch (err: any) {
-    console.error('Stripe webhook error:', err.message);
-    return NextResponse.json(
-      { error: `Webhook Error: ${err.message}` },
-      { status: 400 }
-    );
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error('Stripe webhook error:', err.message);
+      return NextResponse.json(
+        { error: `Webhook Error: ${err.message}` },
+        { status: 400 }
+      );
+    } else {
+      console.error('Unknown error:', err);
+      return NextResponse.json(
+        { error: 'Unknown webhook error' },
+        { status: 400 }
+      );
+    }
   }
 
   // Check for successful payment
